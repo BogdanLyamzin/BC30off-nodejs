@@ -36,6 +36,6 @@ program
     .option("-au, --author <type>");
 
 program.parse(process.argv);
-
+const g
 const options = program.opts();
 invokeAction(options)
