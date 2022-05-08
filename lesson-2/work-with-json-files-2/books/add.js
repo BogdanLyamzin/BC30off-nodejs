@@ -15,4 +15,4 @@ const add = async (title, author) => {
     return newBook;
 };
 
-module.getAll = add;
+module.exports = add;
