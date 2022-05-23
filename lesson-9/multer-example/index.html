@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form id="book-add-form" enctype="multipart/form-data">
+        <div>
+            <label for="book-title">Название:</label>
+            <input type="text" id="book-title" name="title" placeholder="Название">
+        </div>
+        <div>
+            <label for="book-author">Автор</label>
+            <input type="text" id="book-author" name="author" placeholder="Автор">
+        </div>
+        <div>
+            <label for="book-image">Обложка:</label>
+            <input name="image" type="file" id="book-image" multiple>
+        </div>
+        <div>
+            <button type="submit">Добавить</button>
+        </div>
+
+    </form>
+
+    <script>
+        const bookAddForm = document.getElementById("book-add-form");
+        bookAddForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const data = new FormData();
+            const {title, author, image} = this.elements;
+            data.append("title", title.value);
+            data.append("author", author.value);
+            data.append("image", image.files[0]);
+        })
+
+    </script>
+</body>
+
+</html>
