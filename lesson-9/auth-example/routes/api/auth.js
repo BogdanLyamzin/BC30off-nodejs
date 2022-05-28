@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
 const path = require("path");
 const fs = require("fs/promises");
+const Jimp = require("jimp");
 
 const {User, schemas} = require("../../models/User");
 
@@ -94,6 +95,8 @@ router.patch("/avatars", auth, upload.single("avatar"), async(req, res, next)=> 
         const name =`${_id}.${extension}`;
         const resultDir = path.join(avatarsDir, name);
         await fs.rename(tempDir, resultDir);
+        const image = await Jimp.read(resultDir);
+        await image.resize(250, 250).write(resultDir);
         const avatarURL = path.join("avatars", name);
         await User.findByIdAndUpdate(_id, {avatarURL});
         res.json({
